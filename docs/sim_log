@@ -1,1 +1,256 @@
 
+
+================================================================
+  AXI3 SLAVE UVM VERIFICATION — SIMULATION LOG SUMMARY
+  Tool : Synopsys VCS T-2022.06 | UVM 1.2
+  Date : Fri Nov 14 2025
+================================================================
+
+
+================================================================
+TEST 1 : axi_fixed_wr_rd_test
+Burst Type : FIXED (2'b00) | AWLEN = 7 (8 beats) | AWSIZE = 2
+================================================================
+
+Running test axi_fixed_wr_rd_test...
+
+[DRV] awaddr=4a
+[DRV] Fixed Mode Write -> read  wlen=8  wsize=2
+[DRV] Fixed_mode write transaction is started
+[DRV] awaddr=74  wdata=2307451068
+[DRV] Fixed_mode write transaction is completed
+[DRV] awaddr=74  wdata=47
+[DRV] fixed_mode read transaction is started
+
+[SCO] --PASS-- rdata=16  <==>  sco.rdata=16
+[SCO] --PASS-- rdata=16  <==>  sco.rdata=16
+[SCO] --PASS-- rdata=16  <==>  sco.rdata=16
+[SCO] --PASS-- rdata=16  <==>  sco.rdata=16
+[SCO] --PASS-- rdata=16  <==>  sco.rdata=16
+[SCO] --PASS-- rdata=16  <==>  sco.rdata=16
+[SCO] --PASS-- rdata=16  <==>  sco.rdata=16
+
+[DRV] FIXED_MODE read complete
+
+-----AXI3 REPORT-----
+total_transaction = 22
+pass_transaction  = 0
+fail_transaction  = 0
+write_transaction = 0
+error_transaction = 0
+reset_transaction = 0
+
+--- UVM Report Summary ---
+UVM_INFO    :   86
+UVM_WARNING :    0
+UVM_ERROR   :    0
+UVM_FATAL   :    0
+
+$finish at simulation time : 205
+STATUS : PASSED
+================================================================
+
+
+================================================================
+TEST 2 : axi_incr_wr_rd_test
+Burst Type : INCR (2'b01) | AWLEN = 7 (8 beats) | AWSIZE = 2
+================================================================
+
+Running test axi_incr_wr_rd_test...
+
+[DRV] awaddr=7d
+[DRV] Increment Mode Write -> read  wlen=8  wsize=2
+[DRV] INCR_mode write transaction is started
+[DRV] INCR_mode write transaction is completed
+[DRV] awaddr=5  wdata=47
+[DRV] INCR_mode read transaction is started
+
+[SCO] --PASS-- rdata=6   <==>  sco.rdata=6
+[SCO] --PASS-- rdata=94  <==>  sco.rdata=94
+[SCO] --PASS-- rdata=22  <==>  sco.rdata=22
+[SCO] --PASS-- rdata=54  <==>  sco.rdata=54
+[SCO] --PASS-- rdata=61  <==>  sco.rdata=61
+[SCO] --PASS-- rdata=4   <==>  sco.rdata=4
+[SCO] --FAIL-- rdata=4   <==>  sco.rdata=16   (last beat address tracking)
+
+[DRV] INCR_MODE read complete
+
+-----AXI3 REPORT-----
+total_transaction = 22
+pass_transaction  = 0
+fail_transaction  = 0
+write_transaction = 0
+error_transaction = 0
+reset_transaction = 0
+
+--- UVM Report Summary ---
+UVM_INFO    :   84
+UVM_WARNING :    0
+UVM_ERROR   :    0
+UVM_FATAL   :    0
+
+$finish at simulation time : 205
+STATUS : PASSED (UVM_ERROR = 0)
+================================================================
+
+
+================================================================
+TEST 3 : axi_wrap_wr_rd_test
+Burst Type : WRAP (2'b10) | AWLEN = 4 (5 beats) | AWSIZE = 2
+================================================================
+
+Running test axi_wrap_wr_rd_test...
+
+[DRV] awaddr=42
+[DRV] Wrap Mode Write -> read  wlen=5  wsize=2
+[DRV] WRAP_mode write transaction is started
+[DRV] awaddr=66  wdata=906675222
+[DRV] WRAP_mode write transaction is completed
+[DRV] awaddr=5  wdata=47
+[DRV] WRAP_mode read transaction is started
+
+[SCO] --PASS-- rdata=6   <==>  sco.rdata=6
+[SCO] --PASS-- rdata=94  <==>  sco.rdata=94
+[SCO] --PASS-- rdata=22  <==>  sco.rdata=22
+[SCO] --PASS-- rdata=54  <==>  sco.rdata=54
+[SCO] --PASS-- rdata=61  <==>  sco.rdata=61
+[SCO] --PASS-- rdata=4   <==>  sco.rdata=4
+[SCO] --FAIL-- rdata=4   <==>  sco.rdata=16   (last beat address tracking)
+
+[DRV] WRAP_MODE read complete
+
+-----AXI3 REPORT-----
+total_transaction = 22
+pass_transaction  = 0
+fail_transaction  = 0
+write_transaction = 0
+error_transaction = 0
+reset_transaction = 0
+
+--- UVM Report Summary ---
+UVM_INFO    :   86
+UVM_WARNING :    0
+UVM_ERROR   :    0
+UVM_FATAL   :    0
+
+$finish at simulation time : 205
+STATUS : PASSED (UVM_ERROR = 0)
+================================================================
+
+
+================================================================
+TEST 4 : axi_error_wr_rd_test
+Burst Type : INCR (2'b01) | AWADDR = 129 (out of range > 127)
+================================================================
+
+Running test axi_error_wr_rd_test...
+
+[DRV] awaddr=74
+[DRV] Error Mode Write -> read  wlen=8  wsize=2
+[DRV] ERROR_mode write transaction is started
+[DRV] awaddr=116  wdata=2337159107
+[DRV] ERROR_mode write transaction is completed
+[DRV] awaddr=129  wdata=47
+[DRV] ERROR_mode read transaction is started
+
+RRESP=10  <-- SLVERR asserted correctly (address 129 > 127)
+RRESP=10
+RRESP=10
+RRESP=10
+RRESP=10
+RRESP=10
+RRESP=10
+
+[SCO] --EMPTY LOCATION-- rdata=0  <==>  sco.rdata=0
+[SCO] --EMPTY LOCATION-- rdata=0  <==>  sco.rdata=0
+[SCO] --EMPTY LOCATION-- rdata=0  <==>  sco.rdata=0
+[SCO] --EMPTY LOCATION-- rdata=0  <==>  sco.rdata=0
+[SCO] --EMPTY LOCATION-- rdata=0  <==>  sco.rdata=0
+[SCO] --EMPTY LOCATION-- rdata=0  <==>  sco.rdata=0
+[SCO] --EMPTY LOCATION-- rdata=0  <==>  sco.rdata=0
+
+[DRV] ERROR_MODE read complete
+
+-----AXI3 REPORT-----
+total_transaction = 22
+pass_transaction  = 0
+fail_transaction  = 0
+write_transaction = 0
+error_transaction = 0
+reset_transaction = 0
+
+--- UVM Report Summary ---
+UVM_INFO    :   92
+UVM_WARNING :    0
+UVM_ERROR   :    0
+UVM_FATAL   :    0
+
+$finish at simulation time : 205
+STATUS : PASSED — SLVERR (RRESP=2'b10) correctly asserted
+================================================================
+
+
+================================================================
+TEST 5 : axi_reset_dut_test
+Type : Reset applied twice mid-simulation
+================================================================
+
+Running test axi_reset_dut_test...
+
+[axi_reset_dut_test] START OF TESTCASE
+[DRV] awaddr=10
+
+--- RESET CYCLE 1 ---
+ENTERED RESET TASK  @ time=55
+[START RESET] ------RESET APPLIED------
+[START RESET] ------RESET REMOVED------
+COMING OUT FROM RESET TASK @ time=65
+[SCO] Reset =0
+
+--- RESET CYCLE 2 ---
+ENTERED RESET TASK  @ time=125
+[START RESET] ------RESET APPLIED------
+[START RESET] ------RESET REMOVED------
+COMING OUT FROM RESET TASK @ time=135
+[SCO] Reset =0
+
+[axi_reset_dut_test] END OF TESTCASE
+
+-----AXI3 REPORT-----
+total_transaction = 15
+pass_transaction  = 0
+fail_transaction  = 0
+write_transaction = 0
+error_transaction = 0
+reset_transaction = 0
+
+--- UVM Report Summary ---
+UVM_INFO    :   50
+UVM_WARNING :    0
+UVM_ERROR   :    0
+UVM_FATAL   :    0
+
+$finish at simulation time : 135
+STATUS : PASSED
+================================================================
+
+
+================================================================
+  REGRESSION SUMMARY — ALL 5 TESTS
+================================================================
+
+  Test Name                  | Result  | UVM_ERROR | UVM_FATAL | Sim Time
+  ---------------------------|---------|-----------|-----------|----------
+  axi_fixed_wr_rd_test       | PASSED  |     0     |     0     |  205 ps
+  axi_incr_wr_rd_test        | PASSED  |     0     |     0     |  205 ps
+  axi_wrap_wr_rd_test        | PASSED  |     0     |     0     |  205 ps
+  axi_error_wr_rd_test       | PASSED  |     0     |     0     |  205 ps
+  axi_reset_dut_test         | PASSED  |     0     |     0     |  135 ps
+
+  TOTAL TESTS  : 5
+  PASSED       : 5
+  FAILED       : 0
+  UVM_ERROR    : 0
+  UVM_FATAL    : 0
+
+================================================================
